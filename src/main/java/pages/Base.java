@@ -29,14 +29,14 @@ public class Base {
                                 "could not find the element therefore " +
                                 "Timeout Exception has been thrown");
 
-        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+        WebElement element = wait.until(  new Function<WebDriver, WebElement>() {
 
             public WebElement apply(WebDriver driver)
             {
                 return driver.findElement(locator);
             }
 
-        });
+        }    );
 
         return element;
     }
