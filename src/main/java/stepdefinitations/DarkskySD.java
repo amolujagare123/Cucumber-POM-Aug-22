@@ -77,4 +77,16 @@ public class DarkskySD {
 
         Assert.assertTrue(result,"some differences are not 2");
     }
+
+    @Then("I verify today's lowest and highest temp is displayed correctly")
+    public void iVerifyTodaySLowestAndHighestTempIsDisplayedCorrectly() {
+
+        ArrayList<String> expected = darkskyHome.getFrontTempList();
+        ArrayList<String> actual = darkskyHome.getTodaysTimelineTempList();
+
+        System.out.println("expected="+expected);
+        System.out.println("actual="+actual);
+
+        Assert.assertEquals(actual,expected,"Temperatures are not equal");
+    }
 }
