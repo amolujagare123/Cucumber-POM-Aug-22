@@ -2,10 +2,14 @@ package stepdefinitations;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.HotelsSearchResult;
 
+import java.time.Duration;
 import java.util.ArrayList;
+
+import static stepdefinitations.SharedSD.getDriver;
 
 public class HotelsSD {
 
@@ -34,4 +38,37 @@ public class HotelsSD {
 
         Assert.assertTrue(result,"given hotel is not in the list");
     }
+
+    @When("^I select option for stars as (.+)$")
+    public void i_select_option_for_stars_as(String stars)  // "5 stars"
+    {
+
+        hotelsSearchResult.clickStarRating(stars.split(" ")[0]);
+    }
+
+    @Then("^I verify system displays only (.+) hotels on search result$")
+    public void i_verify_system_displays_only_hotels_on_search_result(String stars) throws Throwable {
+
+        getDriver().navigate().refresh();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+
+        int totalRatings = hotelsSearchResult.getTotalRatings();
+        int totalStars = hotelsSearchResult.getTotalStars();
+
+        System.out.println("totalRatings="+totalRatings); // 25
+        System.out.println("totalStars="+totalStars); // 125
+
+        int actualStars = totalStars / totalRatings ;
+        int expectedStars = Integer.parseInt(stars.split(" ")[0]);
+
+        System.out.println("actualStars="+actualStars);
+        System.out.println("expectedStars="+expectedStars);
+
+
+        Assert.assertEquals(actualStars,expectedStars,"wrong stars");
+
+    }
+
+
+
 }

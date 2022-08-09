@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         , glue = "stepdefinitations"
                , plugin = {"pretty","html:target/reports/report.html"
         ,"json:target/reports/report.json","junit:target/reports/report.xml"}
-        , tags = "@hotelsSearch"
+        , tags = "@starverify"
        // ,dryRun = true
 )
 
