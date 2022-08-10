@@ -21,7 +21,7 @@ Feature: All bookings.com scenarios
   @DistList
   Scenario: List of all of hotel within 15 km radius from the center
     Given I am on default locations search result screen
-    Then I verify system displays all hotels within "15" Km radius from city center
+      Then I verify system displays all hotels within "2" Km radius from a beach
 
 
 #3

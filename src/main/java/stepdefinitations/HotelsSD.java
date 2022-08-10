@@ -70,5 +70,30 @@ public class HotelsSD {
     }
 
 
+    @Then("I verify system displays all hotels within {string} Km radius from a beach")
+    public void iVerifySystemDisplaysAllHotelsWithinKmRadiusFromABeach(String distanceStr) {
 
+        ArrayList<Double> beachDistanceList = hotelsSearchResult.getBeachDistanceList();
+
+        System.out.println(beachDistanceList);
+
+        int expectedDist = Integer.parseInt(distanceStr);
+
+        boolean flag = true;
+
+        ArrayList<Double> greaterDistances = new ArrayList<>();
+
+        for (int i=0;i<beachDistanceList.size();i++)
+        {
+            if (beachDistanceList.get(i)>expectedDist) {
+                flag = false;
+                greaterDistances.add((beachDistanceList.get(i)));
+            }
+
+        }
+
+        Assert.assertTrue(flag,"some distances are grater than:"+distanceStr+"Km"
+        +"\nThese are the greater distances:"+greaterDistances);
+
+    }
 }

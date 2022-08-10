@@ -15,6 +15,42 @@ public class HotelsSearchResult extends Base{
 
     By totalStars = By.xpath("//div[@data-testid='rating-stars']/span");
 
+    By beachText = By.xpath("//div[@data-testid='property-card']//span[contains(@class,'acb')]");
+
+    public ArrayList<Double> getBeachDistanceList()
+    {
+        ArrayList<String> beachTextList = getElementTextList(beachText);
+
+        ArrayList<Double> beachDistance = new ArrayList<>();
+
+        for (int i=0;i<beachTextList.size();i++)
+        {
+            String tempDist = beachTextList.get(i);
+            double distance=0;
+
+            try {
+                if (tempDist.split(" ")[1].equals("m")) {
+                    distance = (double) Integer.parseInt(tempDist.split(" ")[0]) / 1000;
+                }
+
+                if (tempDist.split(" ")[1].equals("km")) {
+                    distance = Integer.parseInt(tempDist.split(" ")[0]);
+                }
+            }
+            catch (Exception e)
+            {
+                distance=0;
+            }
+
+            beachDistance.add(distance);
+        }
+
+        return beachDistance;
+
+    }
+
+
+
     public ArrayList<String> getHotelsList()
     {
         return getElementTextList(hotelList);
